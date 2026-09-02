@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Papa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brown-deep: #2B1810;
+    --paper: #F5E9D8;
+    --gold: #C9A227;
+    --gold-soft: #DDBE6B;
+    --cream-text: #F1E4CC;
+    --rust: #8B4A2F;
+    --muted: #a8927a;
+  }
+  *{ box-sizing: border-box; margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--brown-deep);
+    color: var(--cream-text);
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
+  }
+  h1, h2, .display{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .container{
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+  section{ padding: 90px 0; }
+  .section-title{
+    font-size: clamp(26px, 5vw, 34px);
+    margin-bottom: 12px;
+  }
+  .section-sub{
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 44px;
+    max-width: 420px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 50px 28px;
+  }
+  .hero-photo{
+    width: 170px;
+    height: 200px;
+    background: var(--paper);
+    padding: 10px;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.4);
+    margin-bottom: 36px;
+  }
+  .hero-photo img{ width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-photo .ph{
+    width:100%; height:100%;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 12px; color: var(--muted); text-align:center; padding: 8px;
+  }
+  .hero h1{ font-size: clamp(38px, 8vw, 58px); margin-bottom: 16px; }
+  .hero h1 span{ color: var(--gold); display:block; }
+  .hero p{ max-width: 400px; font-size: 16px; line-height: 1.7; color: #cbb89a; }
+  .scroll-hint{
+    margin-top: 54px;
+    font-size: 13px;
+    color: #7a6650;
+    display:flex; flex-direction: column; align-items:center; gap:8px;
+  }
+  .scroll-hint .line{
+    width:1px; height: 34px;
+    background: linear-gradient(#7a6650, transparent);
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about p{
+    font-size: 17px;
+    line-height: 1.8;
+    color: #dcc9a8;
+    margin-bottom: 18px;
+    max-width: 460px;
+  }
+
+  /* ---------- MEMORY GALLERY ---------- */
+  .gallery{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px 18px;
+  }
+  .photo{
+    background: var(--paper);
+    padding: 8px 8px 30px 8px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+  }
+  .photo:nth-child(even){ margin-top: 20px; }
+  .photo .ph, .photo img{
+    width: 100%; aspect-ratio: 1/1; object-fit: cover; display:block;
+  }
+  .photo .ph{
+    background: #d8c6a8; display:flex; align-items:center; justify-content:center;
+    color: var(--muted); font-size: 12px; text-align:center; padding: 8px;
+  }
+  .photo .cap{
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: #5a3d28;
+    text-align:center;
+    margin-top: 8px;
+    padding: 0 2px;
+  }
+
+  /* ---------- REASONS ---------- */
+  .reasons-grid{ display:grid; gap: 14px; }
+  .reason-card{
+    background: rgba(245,233,216,0.05);
+    border: 1px solid rgba(201,162,39,0.25);
+    padding: 20px 22px;
+    cursor: pointer;
+  }
+  .reason-card .q{
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    color: var(--gold-soft);
+    display:flex; align-items:center; justify-content: space-between;
+  }
+  .reason-card .plus{
+    font-size: 20px; color: var(--gold);
+    transition: transform 0.2s ease;
+    flex-shrink:0; margin-left: 12px;
+  }
+  .reason-card.open .plus{ transform: rotate(45deg); }
+  .reason-card .a{
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.3s ease, margin-top 0.3s ease;
+    font-size: 15px; line-height: 1.7; color: #cbb89a;
+  }
+  .reason-card.open .a{ max-height: 200px; margin-top: 12px; }
+
+  /* ---------- MUSIC ---------- */
+  .music{ text-align:center; }
+  .music p{ color: #cbb89a; font-size: 15px; margin-bottom: 22px; }
+  .hero-music{ margin-top: 34px; display:flex; flex-direction:column; align-items:center; gap: 12px; }
+  .hero-music-label{ font-size: 13px; color: #a8927a; font-style: italic; font-family:'Fraunces', serif; }
+  .play-btn{
+    width: 60px; height: 60px; border-radius: 50%;
+    background: var(--gold); border: none; cursor: pointer;
+    display:flex; align-items:center; justify-content:center;
+    margin: 0 auto; box-shadow: 0 10px 24px rgba(201,162,39,0.3);
+  }
+  .play-btn svg{ width: 20px; height: 20px; fill: var(--brown-deep); margin-left: 3px; }
+  .play-btn.playing svg{ margin-left: 0; }
+
+  /* ---------- SURPRISE ---------- */
+  .surprise{ text-align:center; }
+  .surprise-btn{
+    background: var(--gold); color: var(--brown-deep); border:none;
+    font-family:'Fraunces', serif; font-weight: 600; font-size: 16px;
+    padding: 15px 34px; border-radius: 40px; cursor: pointer;
+    box-shadow: 0 12px 26px rgba(201,162,39,0.3);
+  }
+  .surprise-msg{
+    max-width: 420px; margin: 32px auto 0;
+    font-family:'Fraunces', serif; font-style: italic; font-size: 19px;
+    line-height: 1.6; color: var(--gold-soft);
+    opacity: 0; max-height: 0; overflow:hidden;
+    transition: opacity 0.5s ease, max-height 0.5s ease;
+  }
+  .surprise-msg.show{ opacity: 1; max-height: 300px; }
+
+  /* ---------- LETTER ---------- */
+  .letter{
+    background: var(--paper);
+    color: #3a2417;
+    padding: 48px 40px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+  }
+  .letter p{ font-size: 16px; line-height: 1.85; margin-bottom: 18px; }
+  .letter .sign{
+    font-family: 'Fraunces', serif; font-style: italic;
+    font-size: 18px; color: var(--rust); margin-top: 24px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{ padding: 60px 0 50px; text-align:center; color: #7a6650; font-size: 13px; }
+  footer .heart{ color: var(--gold); margin: 0 6px; }
+
+  :focus-visible{ outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition: none !important; } }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+  EDIT GUIDE — before publishing:
+  1. Replace [PAPA'S NAME] with his real name (search & replace all)
+  2. Hero photo: replace the .hero-photo .ph box with
+     <img src="papa1.jpg" alt="Papa"> and upload papa1.jpg
+  3. Gallery photos: same idea for each .photo .ph box below,
+     and edit the caption text under each one
+  4. About section: personalize the description text
+  5. Reasons cards: edit the questions/answers to real reasons
+  6. Music: upload an mp3 file named song.mp3 in the same folder
+     as this html file — the play button already points to it
+  7. Letter + surprise message: personalize with your own words
+=============================================================== -->
+
+<section class="hero">
+  <div class="hero-photo">
+    <img src="hero.jpg" alt="Papa">
+  </div>
+  <h1>Happy Birthday<span>Papa</span></h1>
+  <p>Not everyone gets a whole page made for them. You do — because you're my Papa.</p>
+
+  <div class="hero-music">
+    <button class="play-btn" id="playBtn" aria-label="Play song">
+      <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+    <p class="hero-music-label">A song for you, Papa</p>
+    <audio id="song" src="song.mp3" preload="none"></audio>
+  </div>
+
+  <div class="scroll-hint">
+    <span>scroll down</span>
+    <span class="line"></span>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="container">
+    <h2 class="section-title">About you</h2>
+    <p>Your hands have carried more than I'll ever know — worry, work, and quiet sacrifice you never once complained about.</p>
+    <p>Your voice is the one that still calms me down, even now, even from far away.</p>
+    <p>And your quiet strength? It's the thing I've spent my whole life trying to learn from.</p>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="container">
+    <h2 class="section-title">Memory gallery</h2>
+    <p class="section-sub">A few moments worth keeping.</p>
+    <div class="gallery">
+      <div class="photo">
+        <img src="photo1.jpg" alt="Papa with family">
+        <p class="cap">one of my favorites</p>
+      </div>
+      <div class="photo">
+        <img src="photo2.jpg" alt="Papa with me">
+        <p class="cap">that laugh, right there</p>
+      </div>
+      <div class="photo">
+        <img src="photo3.jpg" alt="Papa">
+        <p class="cap">just another good day</p>
+      </div>
+      <div class="photo">
+        <img src="photo4.jpg" alt="Papa and us">
+        <p class="cap">us, back then</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reasons">
+  <div class="container">
+    <h2 class="section-title">Reasons you're special</h2>
+    <p class="section-sub">Tap a card — there's more than one.</p>
+    <div class="reasons-grid">
+      <div class="reason-card">
+        <div class="q">You never asked for anything back <span class="plus">+</span></div>
+        <div class="a">Everything you gave, you gave quietly — no complaints, no keeping score.</div>
+      </div>
+      <div class="reason-card">
+        <div class="q">You were my first idea of what strong looks like <span class="plus">+</span></div>
+        <div class="a">Long before I understood what strength meant, you were already showing me.</div>
+      </div>
+      <div class="reason-card">
+        <div class="q">You showed up, every single time <span class="plus">+</span></div>
+        <div class="a">Through every hard year and every small win, you were there — without needing to be asked.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="surprise" class="surprise">
+  <div class="container">
+    <h2 class="section-title">One more thing</h2>
+    <button class="surprise-btn" id="surpriseBtn">Click me</button>
+    <p class="surprise-msg" id="surpriseMsg">"No matter where life takes me, you'll always have a special place in my heart. Thank you for being you, Papa."</p>
+  </div>
+</section>
+
+<section id="letter">
+  <div class="container">
+    <h2 class="section-title">A letter, just for you</h2>
+    <div class="letter">
+      <p>Dear Papa,</p>
+      <p>No matter how much I try to put it into words, it never feels like enough. You gave everything without ever asking for anything back.</p>
+      <p>Every time I look back, you're the one who was always there — through the hard days and the easy ones. Having you around makes everything feel lighter.</p>
+      <p>So today, I just want to say thank you — for all the things you did for me without ever expecting a thank you.</p>
+      <p class="sign">— Yours always</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  made <span class="heart">&hearts;</span> for Papa, on your birthday
+</footer>
+
+<script>
+  document.querySelectorAll('.reason-card').forEach(card => {
+    card.addEventListener('click', () => card.classList.toggle('open'));
+  });
+
+  const btn = document.getElementById('playBtn');
+  const icon = document.getElementById('playIcon');
+  const audio = document.getElementById('song');
+  let playing = false;
+
+  btn.addEventListener('click', () => {
+    if (!playing) {
+      audio.play();
+      icon.innerHTML = '<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>';
+      btn.classList.add('playing');
+    } else {
+      audio.pause();
+      icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+      btn.classList.remove('playing');
+    }
+    playing = !playing;
+  });
+
+  const sBtn = document.getElementById('surpriseBtn');
+  const sMsg = document.getElementById('surpriseMsg');
+  sBtn.addEventListener('click', () => sMsg.classList.toggle('show'));
+</script>
+
+</body>
+</html>
